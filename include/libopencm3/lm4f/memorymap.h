@@ -63,4 +63,10 @@
 
 #define SYSCTL_BASE			(0x400FE000)
 
+/* SSI */
+#define SSI0_BASE			(0x40008000)
+#define SSI1_BASE			(0x40009000)
+#define SSI2_BASE			(0x4000a000)
+#define SSI3_BASE			(0x4000b000)
+
 #endif
