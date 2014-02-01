@@ -23,7 +23,7 @@
 #include <libopencm3/cm3/common.h>
 #include <libopencm3/lm4f/memorymap.h>
 
-/* 
+/*
  * ============================================================================
  * Convenience macros
  * ----------------------------------------------------------------------------
@@ -36,7 +36,7 @@
 #define SSI3				SSI3_BASE
 /** @} */
 
-/* 
+/*
  * ============================================================================
  * SSI registers
  * ----------------------------------------------------------------------------
@@ -55,8 +55,8 @@
 /* SSI clock prescaler register */
 #define SSI_CPSR(ssi_base)		MMIO32(ssi_base + 0x10)
 
-/* 
-* SSI interrupt registers 
+/*
+* SSI interrupt registers
 * (mask, raw status, masked status, clear)
 */
 #define SSI_IM(ssi_base)		MMIO32(ssi_base + 0x14)
@@ -86,7 +86,7 @@
 #define SSI_PCELL_ID2(ssi_base)		MMIO32(ssi_base + 0xff8)
 #define SSI_PCELL_ID3(ssi_base)		MMIO32(ssi_base + 0xffc)
 
-/* 
+/*
 * =============================================================================
 * SSI_CR0 register
 * -----------------------------------------------------------------------------
@@ -120,7 +120,7 @@
 /** SCR (serial clock rate) values */
 #define SSI_CR0_SCR_MASK		(0xff << 8)
 
-/* 
+/*
 * =============================================================================
 * SSI_CR1 register
 * -----------------------------------------------------------------------------
@@ -138,7 +138,7 @@
 /** LBM (loopback mode) */
 #define SSI_CR1_LBM			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_DR register
 * -----------------------------------------------------------------------------
@@ -146,7 +146,7 @@
 /** Data mask */
 #define SSI_DR_DATA_MASK		(0xff << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_SR register
 * -----------------------------------------------------------------------------
@@ -162,7 +162,7 @@
 /** ssi tx fifo empty */
 #define SSI_SR_TFE			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_CPSR register
 * -----------------------------------------------------------------------------
@@ -170,7 +170,7 @@
 /** prescaler divisor mask */
 #define SSI_CPSR_CPSDVSR_MASK		(0xff << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_IM register
 * -----------------------------------------------------------------------------
@@ -184,7 +184,7 @@
 /** recv overrun mask interrupt */
 #define SSI_IM_RORIM			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_RIS register
 * -----------------------------------------------------------------------------
@@ -198,7 +198,7 @@
 /** recv overrun status interrupt */
 #define SSI_RIS_RORRIS			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_MIS register
 * -----------------------------------------------------------------------------
@@ -212,7 +212,7 @@
 /** recv overrun masked status interrupt */
 #define SSI_MIS_RORMIS			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_ICR register
 * -----------------------------------------------------------------------------
@@ -222,7 +222,7 @@
 /** recive overrun int clear */
 #define SSI_ICR_RORIC			(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_DMACTL register
 * -----------------------------------------------------------------------------
@@ -232,7 +232,7 @@
 /** rx dma enable */
 #define SSI_DMACTL_RXDMAE 		(1 << 0)
 
-/* 
+/*
 * =============================================================================
 * SSI_CC register
 * -----------------------------------------------------------------------------
@@ -243,55 +243,55 @@
 #define SSI_CC_CS_0			(0 << 0)
 #define SSI_CC_CS_5			(5 << 0)
 
-/* 
+/*
 * Peripherial id + primecell registers TODO!!!!!!!
 */
 
-/* 
+/*
 * =============================================================================
 * Convenience enums.
 * -----------------------------------------------------------------------------
 */
 
-typedef enum{
+enum ssi_clock_source {
 	SSI_CLOCK_SOURCE_SYSTEM,
 	SSI_CLOCK_SOURCE_PIOSC,
 }ssi_clock_source;
 
-typedef enum{
+enum ssi_mode {
 	SSI_MODE_MASTER,
 	SSI_MODE_SLAVE_TX_ENABLED,
 	SSI_MODE_SLAVE_TX_DISABLED,
-}ssi_mode;
+};
 
-typedef enum{
+enum ssi_protocol {
 	SSI_PROTOCOL_FREESCALE,
 	SSI_PROTOCOL_TI,
 	SSI_PROTOCOL_MICROWIRE,
-}ssi_protocol;
+};
 
-/* 
+/*
 * =============================================================================
 * Function forward declarations.
 * -----------------------------------------------------------------------------
 */
 BEGIN_DECLS
 
-void ssi_enable(u32 ssi);
-void ssi_disable(u32 ssi);
-void ssi_set_mode(u32 ssi, ssi_mode mode);
-void ssi_set_frame_format(u32 ssi, 
-			u8 bits, u8 phase, 
-			u8 polarity, ssi_protocol protocol);
-void ssi_set_clock_source(u32 ssi, ssi_clock_source source);
+void ssi_enable(uint32_t ssi);
+void ssi_disable(uint32_t ssi);
+void ssi_set_mode(uint32_t ssi, ssi_mode mode);
+void ssi_set_frame_format(uint32_t ssi,
+			  uint8_t bits, uint8_t phase,
+			  uint8_t polarity, enum ssi_protocol protocol);
+void ssi_set_clock_source(uint32_t ssi, enum ssi_clock_source source);
 //void ssi_set_clock_rate(u32 ssi, u8 rate);
 //void ssi_set_clock_prescaler(u32 ssi, u8 val);
-void ssi_set_bit_rate(u32 ssi, u8 divider, u8 rate);
-void ssi_set_DMA_enable(u32 ssi, u8 val);
+void ssi_set_bit_rate(uint32_t ssi, uint8_t divider, uint8_t rate);
+void ssi_set_DMA_enable(uint32_t ssi, uint8_t val);
 
-void ssi_send(u32 ssi,u32 data);
-u32 ssi_recv(u32 ssi);
+void ssi_send(uint32_t ssi,uint32_t data);
+uint32_t ssi_recv(uint32_t ssi);
+
 END_DECLS
-/* TODO add others? */
 
 #endif /* LIBOPENCM3_LM4F_SSI_H */
