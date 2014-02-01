@@ -17,8 +17,6 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h>
-
 #include <libopencm3/cm3/scb.h>
 
 /* Those are defined only on CM3 or CM4 */

@@ -31,7 +31,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string.h>
+#include <stddef.h>
 #include <libopencm3/ethernet/mac.h>
 #include <libopencm3/ethernet/phy.h>
 #include <libopencm3/stm32/gpio.h>

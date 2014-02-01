@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <string.h>
+#include <stddef.h>
 #include <libopencm3/cm3/common.h>
 #include <libopencm3/stm32/tools.h>
 #include <libopencm3/stm32/otg_fs.h>
