@@ -279,7 +279,7 @@ BEGIN_DECLS
 
 void ssi_enable(uint32_t ssi);
 void ssi_disable(uint32_t ssi);
-void ssi_set_mode(uint32_t ssi, ssi_mode mode);
+void ssi_set_mode(uint32_t ssi, enum ssi_mode mode);
 void ssi_set_frame_format(uint32_t ssi,
 			  uint8_t bits, uint8_t phase,
 			  uint8_t polarity, enum ssi_protocol protocol);
@@ -287,7 +287,7 @@ void ssi_set_clock_source(uint32_t ssi, enum ssi_clock_source source);
 //void ssi_set_clock_rate(u32 ssi, u8 rate);
 //void ssi_set_clock_prescaler(u32 ssi, u8 val);
 void ssi_set_bit_rate(uint32_t ssi, uint8_t divider, uint8_t rate);
-void ssi_set_DMA_enable(uint32_t ssi, uint8_t val);
+void ssi_set_dma_enable(uint32_t ssi, uint8_t val);
 
 void ssi_send(uint32_t ssi,uint32_t data);
 uint32_t ssi_recv(uint32_t ssi);

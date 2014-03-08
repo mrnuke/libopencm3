@@ -25,8 +25,9 @@
  *
  * @param[in] ssi SSI block register address base @ref ssi_reg_base
  */
-void ssi_enable(u32 ssi){
-	SSI_CR1(ssi) |= SPI_CR1_SEE;
+void ssi_enable(uint32_t ssi)
+{
+	SSI_CR1(ssi) |= SSI_CR1_SEE;
 }
 
 /**
@@ -34,8 +35,9 @@ void ssi_enable(u32 ssi){
  *
  * @param[in] ssi SSI block register address base @ref ssi_reg_base
  */
-void ssi_disable(u32 ssi){
-	SSI_CR1(ssi) &= ~SPI_CR1_SEE;
+void ssi_disable(uint32_t ssi)
+{
+	SSI_CR1(ssi) &= ~SSI_CR1_SEE;
 }
 
 /**
@@ -44,15 +46,16 @@ void ssi_disable(u32 ssi){
  * @param[in] ssi SSI block register address base @ref ssi_reg_base
  * @param[in] mode SSI mode to set
  */
-void ssi_set_mode(u32 ssi, ssi_mode mode){
+void ssi_set_mode(uint32_t ssi, enum ssi_mode mode)
+{
 	switch(mode){
 		case SSI_MODE_MASTER:
 			return;
 		case SSI_MODE_SLAVE_TX_ENABLED:
-			SSI_CR1(ssi) |= SPI_CR1_MS;
+			SSI_CR1(ssi) |= SSI_CR1_MS;
 			return;
 		case SSI_MODE_SLAVE_TX_DISABLED:
-			SSI_CR1(ssi) |= (SPI_CR1_MS | SPI_CR1_SOD;
+			SSI_CR1(ssi) |= (SSI_CR1_MS | SSI_CR1_SOD);
 			return;
 		default:
 			/* I should not end here! */
@@ -69,10 +72,11 @@ void ssi_set_mode(u32 ssi, ssi_mode mode){
  * @param[in] polarity SSI polarity
  * @param[in] mode SSI mode
  */
-void ssi_set_frame_format(u32 ssi, 
-			u8 bits, u8 phase, 
-			u8 polarity, ssi_protocol protocol){
-	u32 regTemp = 0;
+void ssi_set_frame_format(uint32_t ssi,
+			uint8_t bits, uint8_t phase,
+			uint8_t polarity, enum ssi_protocol protocol)
+{
+	uint32_t regTemp = 0;
 	switch(protocol){
 		case SSI_PROTOCOL_FREESCALE:
 			// Here I need to set polarity and phase
@@ -94,7 +98,7 @@ void ssi_set_frame_format(u32 ssi,
 			return;
 	}
 	regTemp |= (SSI_CR0_DSS_MASK & (bits-1));
-	u32 reg32 = SSI_CR0(ssi);
+	uint32_t reg32 = SSI_CR0(ssi);
 	reg32 |= regTemp;
 	SSI_CR0(ssi)= reg32;
 }
@@ -105,8 +109,9 @@ void ssi_set_frame_format(u32 ssi,
  * @param[in] ssi SSI block register address base @ref ssi_reg_base
  * @param[in] source SSI clock source
  */
-void ssi_set_clock_source(u32 ssi, ssi_clock_source source){
-	u32 regTemp=0;
+void ssi_set_clock_source(uint32_t ssi, enum ssi_clock_source source)
+{
+	uint32_t regTemp=0;
 	switch(source){
 		case SSI_CLOCK_SOURCE_SYSTEM:
 			regTemp |= (SSI_CC_CS_MASK & SSI_CC_CS_0);
@@ -115,7 +120,7 @@ void ssi_set_clock_source(u32 ssi, ssi_clock_source source){
 			regTemp |= (SSI_CC_CS_MASK & SSI_CC_CS_5);
 			break;
 	}
-	u32 reg32 = SSI_CC(ssi);
+	uint32_t reg32 = SSI_CC(ssi);
 	reg32|= regTemp;
 	SSI_CC(ssi) = reg32;
 }
@@ -126,10 +131,11 @@ void ssi_set_clock_source(u32 ssi, ssi_clock_source source){
  * @param[in] ssi SSI block register address base @ref ssi_reg_base
  * @param[in] rate SSI clock rate
  */
-void ssi_set_clock_rate(u32 ssi, u8 rate){
-	u32 regTemp=0;
-	
-	u32 reg32 = SSI_CR0(ssi);
+void ssi_set_clock_rate(uint32_t ssi, uint8_t rate)
+{
+	uint32_t regTemp=0;
+
+	uint32_t reg32 = SSI_CR0(ssi);
 	reg32 |= regTemp;
 	SSI_CR0(ssi)= reg32;
 }
@@ -140,9 +146,8 @@ void ssi_set_clock_rate(u32 ssi, u8 rate){
  * @param[in] rate SSI clock rate
  * @param[in] divider SSI clock divider
  */
-void ssi_set_bit_rate(u32 ssi, u8 divider, u8 rate){
-	u32 tempCR0=0;
-	u32 tempCR0=0;
+void ssi_set_bit_rate(uint32_t ssi, uint8_t divider, uint8_t rate)
+{
 }
 
 /* TODO: implement the other stuff */
