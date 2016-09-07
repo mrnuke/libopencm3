@@ -36,7 +36,7 @@ TGT_CFLAGS	= -Os \
 TGT_CFLAGS      += $(DEBUG_FLAGS)
 # ARFLAGS	= rcsv
 ARFLAGS		= rcs
-OBJS		= gpio.o vector.o assert.o systemcontrol.o rcc.o uart.o \
+OBJS		= gpio.o vector.o assert.o systemcontrol.o rcc.o ssi.o uart.o \
 		  usb_lm4f.o usb.o usb_control.o usb_standard.o
 
 VPATH += ../usb:../cm3
